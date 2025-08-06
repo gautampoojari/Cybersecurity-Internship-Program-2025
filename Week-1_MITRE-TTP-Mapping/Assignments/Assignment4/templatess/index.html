@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homoglyph Link Checker</title>
+</head>
+<body>
+    <h1>Homoglyph Link Checker</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <label>Paste text:</label><br>
+        <textarea name="text" rows="10" cols="80"></textarea><br><br>
+
+        <label>Or upload a .txt file:</label>
+        <input type="file" name="file"><br><br>
+
+        <input type="submit" value="Check Links">
+    </form>
+
+    {% if results %}
+        <h2>All Links Found ({{ results.all_links|length }}):</h2>
+        <ul>
+            {% for link in results.all_links %}
+                <li>{{ link }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Suspicious Links:</h2>
+        {% if results.suspicious_links %}
+            <ul style="color: red;">
+                {% for link in results.suspicious_links %}
+                    <li>{{ link }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p style="color: green;">None detected.</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
