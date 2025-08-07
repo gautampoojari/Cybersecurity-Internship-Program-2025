@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gautam's Shortener 🔗</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Gautam's Custom URL Shortener✨</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    <form method="POST">
+        <input type="text" name="url" placeholder="Enter Long URL" required><br>
+        <input type="text" name="alias" placeholder="Custom name (e.g. riyaxoxo)" required><br>
+        <button type="submit">Shorten It</button>
+    </form>
+
+    {% if short_url %}
+        <p class="success">✅ Short URL created: <a href="{{ short_url }}" target="_blank">{{ short_url }}</a></p>
+    {% endif %}
+</body>
+</html>
